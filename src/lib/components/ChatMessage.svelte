@@ -2,7 +2,7 @@
   import type { ChatCompletionRequestMessageRoleEnum } from 'openai'
   export let type: ChatCompletionRequestMessageRoleEnum
   export let message: string
-  $: formattedMessage = message.replace(/(\d+[\.-])/g, '<br>$1')
+  $: formattedMessage = message.replace(/(\d+[\.-])/g, '<br><br>$1')
 </script>
 
 <div class="flex {type === 'user' ? 'justify-end' : 'justify-start'} py-2">

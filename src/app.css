@@ -1,9 +1,49 @@
-/* Write your global styles here, in PostCSS syntax */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body {
-	@apply h-full;
+.chat-container {
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  width: 100%;
 }
+
+.chat-header {
+  background-color: #e2e8f0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.chat-header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.chat-messages {
+  padding: 1rem;
+}
+
+.chat-message {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.chat-message p {
+  margin: 0;
+}
+
+.chat-input {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.chat-input input[type="text"] {
+  border: none;
+ 

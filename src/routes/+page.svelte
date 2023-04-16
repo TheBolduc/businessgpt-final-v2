@@ -79,7 +79,6 @@
         <ChatMessage type="assistant" message="Loading.." />
       {/if}
     </div>
-    <div class="" bind:this={scrollToDiv} />
   </div>
   <form
     class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"

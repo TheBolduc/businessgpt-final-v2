@@ -38,7 +38,6 @@
 				if (e.data === '[DONE]') {
 					chatMessages = [...chatMessages, { role: 'assistant', content: answer }]
 					answer = ''
-					eventSource.close(); // Close the connection
 					return
 				}
 

@@ -17,7 +17,7 @@ body {
 }
 
 .chatbot-container {
-	@apply bg-white;
+	@apply bg-[#f7f7f8];
 }
 
 .chat-message {
@@ -25,6 +25,6 @@ body {
 }
 
 .chat-message-text {
-	@apply text-left;
+	@apply text-left bg-gray-100;
 	white-space: pre-line;
 }

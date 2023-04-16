@@ -65,10 +65,10 @@
       <p class="text-sm italic">
         Your own personal business analyst and assistant.
       </p>
-      <div class="w-full border-b border-gray-400 mb-4"></div>
+      <div class="w-full border-b border-gray-400 mb-6"></div>
     </div>
     <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-      <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto">
+      <div class="flex flex-col gap-2 h-[calc(100vh-300px)] overflow-y-auto mt-4 mb-4">
         <ChatMessage
           type="assistant"
           message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!"
@@ -94,3 +94,4 @@
     </form>
   </div>
 </div>
+

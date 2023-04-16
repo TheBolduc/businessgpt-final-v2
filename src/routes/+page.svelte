@@ -55,6 +55,7 @@
     answer = '';
     console.error(err);
   }
+  
 </script>
 
 <div class="flex flex-col min-h-screen pt-4 w-full px-8 items-center gap-2">
@@ -87,8 +88,9 @@
     <form
       class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"
       on:submit|preventDefault={() => handleSubmit()}
-  >
-    <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
-    <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500"> Send </button>
-  </form>
+    >
+      <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
+      <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500"> Send </button>
+    </form>
+  </div>
 </div>

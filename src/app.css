@@ -1,3 +1,13 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	@apply h-full;
+}
+
 .chat-container {
   background-color: #f7fafc;
   border: 1px solid #e2e8f0;

@@ -57,14 +57,15 @@
   }
 </script>
 
-      <div class="flex flex-col min-h-screen pt-4 w-full px-8 items-center gap-2 bg-white">
-  <div class="flex-1 flex flex-col items-center justify-center">
-    <h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
-    <p class="text-sm italic">Your own personal business analyst and assistant.</p>
-    <div class="w-full border-b border-gray-400 mb-4"></div>
-  </div>
-  <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-    <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto">
+      <div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-white"> 
+        <div class="flex-1 flex flex-col items-center justify-center"> 
+          <h1 class="text-2xl font-bold w-full text-center">BusinessGPT
+          </h1> <p class="text-sm italic">Your own personal business analyst and assistant.</p> 
+          <div class="w-full border-b border-gray-400 mb-4">
+          </div>
+        </div> 
+        <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2"> 
+        <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto" bind:this={chatContainer} >
       <ChatMessage
         type="assistant"
         message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!"

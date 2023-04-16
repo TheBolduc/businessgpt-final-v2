@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	@apply bg-[#f7f7f8]
+}
+
 html,
 body {
 	@apply h-full;
@@ -41,4 +45,17 @@ body {
 .chat-message-text.assistant {
   @apply text-left bg-gray-200;
   white-space: pre-line;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f7f7f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 20px;
 }

@@ -25,7 +25,7 @@ body {
 }
 
 .chatbot-container {
-	@apply bg-[#f7f7f8];
+	@apply bg-[#f7f7f8] h-full;
 }
 
 .chat-message {

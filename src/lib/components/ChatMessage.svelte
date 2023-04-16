@@ -6,10 +6,10 @@
 <div class="flex {type === 'user' ? 'justify-end' : 'justify-start'} py-2">
   <div class="hidden md:block w-10">
     {#if type === 'assistant'}
-      <img src="https://ui-avatars.com/api/?name=Tommy" alt="Tommy avatar" class="rounded-full w-10 h-10" />
+      <img src="https://ui-avatars.com/api/?name=Tommy" alt="Tommy avatar" class="rounded-full w-10 h-10 object-cover" />
     {/if}
     {#if type === 'user'}
-      <img src="https://ui-avatars.com/api/?name=User" alt="User avatar" class="rounded-full w-10 h-10" />
+      <img src="https://ui-avatars.com/api/?name=User" alt="User avatar" class="rounded-full w-10 h-10 object-cover" />
     {/if}
   </div>
   <div class="px-2">

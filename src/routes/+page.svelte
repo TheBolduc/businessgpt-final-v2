@@ -69,7 +69,7 @@
 	</div>
 	<div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
 		<div class="flex flex-col gap-2">
-			<ChatMessage type="assistant" message="Hi! My name is Tommy, sk me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!" />
+			<ChatMessage type="assistant" message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!" />
 			{#each chatMessages as message}
 				<ChatMessage type={message.role} message={message.content} />
 			{/each}

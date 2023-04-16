@@ -57,7 +57,7 @@
   }
 </script>
 
-     <div class="flex flex-col min-h-screen pt-4 w-full px-8 items-center gap-2">
+     <div class="flex flex-col min-h-screen pt-4 w-full px-8 items-center gap-2 bg-white">
         <div class="flex-1 flex flex-col items-center justify-center"> 
           <h1 class="text-2xl font-bold w-full text-center">BusinessGPT
           </h1> <p class="text-sm italic">Your own personal business analyst and assistant.</p> 

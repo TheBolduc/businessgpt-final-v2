@@ -64,12 +64,12 @@
 
 <div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-white">
 	<div class="flex-1 flex flex-col items-center justify-center">
-		<h1 class="text-2xl font-bold w-full text-center">Tommy</h1>
+		<h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
 		<p class="text-sm italic">Your own personal business analyst and assistant.</p>
 	</div>
 	<div class="h-[80%] w-full bg-gray-100 rounded-md p-4 overflow-y-auto flex flex-col gap-4 shadow-lg">
 		<div class="flex flex-col gap-2">
-			<ChatMessage type="assistant" message="Hello, ask me anything you want!" />
+			<ChatMessage type="assistant" message="Ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!" />
 			{#each chatMessages as message}
 				<ChatMessage type={message.role} message={message.content} />
 			{/each}

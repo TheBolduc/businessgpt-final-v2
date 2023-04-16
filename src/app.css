@@ -15,3 +15,11 @@ body {
 .chatbot-container {
 	@apply bg-white;
 }
+
+.chat-message {
+	@apply bg-transparent border-none p-0 mb-2;
+}
+
+.chat-message-text {
+	@apply text-left;
+}

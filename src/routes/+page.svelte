@@ -83,8 +83,8 @@
 		<div class="" bind:this={scrollToDiv} />
 	</div>
 	<form
-		class="flex w-full rounded-md bg-gray-200 p-4 shadow-inner"
-		on:submit|preventDefault={() => handleSubmit()}
+                class="flex w-full rounded-md bg-gray-200 p-4 shadow-inner space-x-2"
+                on:submit|preventDefault={() => handleSubmit()}
 	>
                 <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
 		<button type="submit" class="btn btn-primary bg-green-500"> Send </button>

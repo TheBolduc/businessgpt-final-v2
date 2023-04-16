@@ -16,7 +16,7 @@
 	}
 
 	const handleSubmit = async () => {
-		if (!query.trim()) return; // Add this line to check if the input is empty
+		if (!query.trim()) return;
 		loading = true
 		chatMessages = [...chatMessages, { role: 'user', content: query }]
 
@@ -38,17 +38,18 @@
 				if (e.data === '[DONE]') {
 					chatMessages = [...chatMessages, { role: 'assistant', content: answer }]
 					answer = ''
+					eventSource.close(); // Close the connection
 					return
 				}
 
-				const completionResponse = JSON.parse(e.data)
-				const [{ delta }] = completionResponse.choices
+				const completionResponse = JSON.parse(e.data);
+				const [{ delta }] = completionResponse.choices;
 
 				if (delta.content) {
-					answer = (answer ?? '') + delta.content
+					answer = (answer ?? '') + delta.content;
 				}
 			} catch (err) {
-				handleError(err)
+				handleError(err);
 			}
 		})
 		eventSource.stream()
@@ -85,11 +86,4 @@
     </div>
     <div class="" bind:this={scrollToDiv} />
   </div>
-  <form
-    class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"
-    on:submit|preventDefault={() => handleSubmit()}
-  >
-    <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
-    <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500"> Send </button>
-  </form>
-</div>
+ 

@@ -6,10 +6,10 @@
 	let answer: string = ''
 	let loading: boolean = false
 	let chatMessages: ChatCompletionRequestMessage[] = []
-	let scrollToDiv: HTMLDivElement
+	let chatContainer: HTMLDivElement
 	function scrollToBottom() {
 		setTimeout(function () {
-			scrollToDiv.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' })
+			chatContainer.scrollTop = chatContainer.scrollHeight
 		}, 100)
 	}
 	const handleSubmit = async () => {
@@ -61,7 +61,7 @@
     <div class="w-full border-b border-gray-400 mb-4"></div>
   </div>
   <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-    <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto">
+    <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto" bind:this={chatContainer}>
       <ChatMessage type="assistant" message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!" />
       {#each chatMessages as message}
         <ChatMessage type={message.role} message={message.content} />
@@ -73,7 +73,6 @@
         <ChatMessage type="assistant" message="Loading.." />
       {/if}
     </div>
-    <div class="" bind:this={scrollToDiv} />
   </div>
   <form
     class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"

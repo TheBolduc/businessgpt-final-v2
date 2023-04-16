@@ -62,12 +62,12 @@
 	}
 </script>
 
-<div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-gray-100">
+<div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-white">
 	<div class="flex-1 flex flex-col items-center justify-center">
-		<h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
-		<p class="text-sm italic">Tommy, your own personal business analyst and assistant.</p>
+		<h1 class="text-2xl font-bold w-full text-center">Tommy</h1>
+		<p class="text-sm italic">Your own personal business analyst and assistant.</p>
 	</div>
-	<div class="h-[80%] w-full bg-white rounded-md p-4 overflow-y-auto flex flex-col gap-4 shadow-lg">
+	<div class="h-[80%] w-full bg-gray-100 rounded-md p-4 overflow-y-auto flex flex-col gap-4 shadow-lg">
 		<div class="flex flex-col gap-2">
 			<ChatMessage type="assistant" message="Hello, ask me anything you want!" />
 			{#each chatMessages as message}
@@ -83,11 +83,12 @@
 		<div class="" bind:this={scrollToDiv} />
 	</div>
 	<form
-		class="flex w-full rounded-md gap-4 bg-gray-200 p-4 shadow-inner"
+		class="flex w-full rounded-md gap-4 bg-gray-300 p-4 shadow-inner"
 		on:submit|preventDefault={() => handleSubmit()}
 	>
 		<input type="text" class="input input-bordered w-full shadow" bind:value={query} />
-		<button type="submit" class="btn btn-accent"> Send </button>
+		<button type="submit" class="btn btn-primary"> Send </button>
 	</form>
 </div>
+
 

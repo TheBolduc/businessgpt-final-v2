@@ -68,7 +68,6 @@
 		<p class="text-sm italic">Your own personal business analyst and assistant.</p>
 	</div>
 	<div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-	  <body class="bg-white flex items-center justify-center h-screen">
 		<div class="flex flex-col gap-2">
 			<ChatMessage type="assistant" message="Hi! My name is Tommy, sk me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!" />
 			{#each chatMessages as message}
@@ -81,7 +80,6 @@
 				<ChatMessage type="assistant" message="Loading.." />
 			{/if}
 		</div>
-		</body>
 		<div class="" bind:this={scrollToDiv} />
 	</div>
 	<form

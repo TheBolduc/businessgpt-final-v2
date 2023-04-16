@@ -16,6 +16,7 @@
 	}
 
 	const handleSubmit = async () => {
+		if (!query.trim()) return; // Add this line to check if the input is empty
 		loading = true
 		chatMessages = [...chatMessages, { role: 'user', content: query }]
 
@@ -60,12 +61,17 @@
 		answer = ''
 		console.error(err)
 	}
+
+<script lang="ts">
+  // ... (The script section remains the same)
 </script>
 
 <div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-white">
 	<div class="flex-1 flex flex-col items-center justify-center">
 		<h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
+		<div class="w-full border-b border-gray-300 mb-4"></div>
 		<p class="text-sm italic">Your own personal business analyst and assistant.</p>
+		<div class="w-full border-b border-gray-300 mb-4"></div>
 	</div>
 	<div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
 		<div class="flex flex-col gap-2">
@@ -83,12 +89,10 @@
 		<div class="" bind:this={scrollToDiv} />
 	</div>
 	<form
-                class="flex w-full rounded-md bg-gray-200 p-4 shadow-inner space-x-2"
-                on:submit|preventDefault={() => handleSubmit()}
+		class="flex w-full rounded-md bg-gray-200 p-4 shadow-inner space-x-2"
+		on:submit|preventDefault={() => handleSubmit()}
 	>
-                <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
-		<button type="submit" class="btn btn-primary bg-green-500"> Send </button>
+		<input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
+		<button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 hover:border-transparent"> Send </button>
 	</form>
 </div>
-
-

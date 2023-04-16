@@ -90,4 +90,3 @@
     class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"
     on:submit|preventDefault={() => handleSubmit()}
   >
-    <input type="

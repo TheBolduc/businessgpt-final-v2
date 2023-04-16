@@ -68,7 +68,7 @@
   <div class="flex-1 flex flex-col items-center justify-center">
     <h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
     <p class="text-sm italic">Your own personal business analyst and assistant.</p>
-    <div class="w-full border-b border-gray-500 mb-4"></div>
+    <div class="w-full border-b border-gray-400 mb-4"></div>
   </div>
   <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
     <div class="flex flex-col gap-2 max-h-[calc(100vh-250px)] overflow-y-auto">
@@ -90,6 +90,6 @@
     on:submit|preventDefault={() => handleSubmit()}
   >
     <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
-    <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 hover:border-transparent border border-white"> Send </button>
+    <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500"> Send </button>
   </form>
 </div>

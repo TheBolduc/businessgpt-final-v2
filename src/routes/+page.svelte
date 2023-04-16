@@ -62,8 +62,6 @@
 		console.error(err)
 	}
 
-<script lang="ts">
-  // ... (The script section remains the same)
 </script>
 
 <div class="flex flex-col h-screen pt-4 w-full px-8 items-center gap-2 bg-white">

@@ -19,7 +19,7 @@
     {#if type === 'user'}
       <div class="text-sm text-gray-500">User</div>
     {/if}
-    <div class="bg-gray-250 text-gray-900 p-2 rounded-lg {type === 'user' ? 'bg-gray-100 text-black' : ''}">
+   <div class="bg-gray-250 text-gray-900 p-2 rounded-lg {type === 'user' ? 'chat-message-text user' : 'chat-message-text assistant'}">
       {message}
     </div>
   </div>

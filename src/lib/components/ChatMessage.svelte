@@ -3,8 +3,9 @@
 	export let type: ChatCompletionRequestMessageRoleEnum
 	export let message: string
 
-	$: formattedMessage = message.split(/(?=\d+\-)/g).join('\n')
+	$: formattedMessage = message.replace(/(\d+[\.-])/g, '\n$1')
 </script>
+
 <div class="flex {type === 'user' ? 'justify-end' : 'justify-start'} py-2">
 	<div class="hidden md:block w-10 min-w-10 h-10 flex-none">
 		{#if type === 'assistant'}

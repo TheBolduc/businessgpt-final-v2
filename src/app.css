@@ -32,3 +32,13 @@ body {
 	@apply text-left bg-gray-100;
 	white-space: pre-line;
 }
+
+.chat-message-text.user {
+  @apply text-left bg-gray-100;
+  white-space: pre-line;
+}
+
+.chat-message-text.assistant {
+  @apply text-left bg-gray-200;
+  white-space: pre-line;
+}

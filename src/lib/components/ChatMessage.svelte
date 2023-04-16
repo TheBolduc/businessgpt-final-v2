@@ -14,7 +14,7 @@
 		{#if type === 'assistant'}
 			<div class="text-sm text-gray-500">Tommy</div>
 		{/if}
-		<div class="bg-gray-300 text-gray-900 p-2 rounded-lg {type === 'user' ? 'bg-blue-500 text-black' : ''}">
+		<div class="bg-gray-250 text-gray-900 p-2 rounded-lg {type === 'user' ? 'bg-blue-500 text-black' : ''}">
 			{message}
 		</div>
 	</div>

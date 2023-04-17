@@ -63,3 +63,20 @@ body {
   background-color: #d1d5db;
   border-radius: 20px;
 }
+
+.chat-container {
+  position: relative;
+}
+
+.chat-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+  background: #f7f7f8;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+  background-color: #d1d5db;
+  border-radius: 20px;
+}

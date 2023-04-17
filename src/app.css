@@ -25,7 +25,11 @@ body {
 }
 
 .chatbot-container {
-	@apply bg-[#f7f7f8] h-full min-h-screen w-full;
+  @apply bg-[#f7f7f8] h-full min-h-screen w-full;
+}
+
+.chatbot-wrapper {
+  @apply h-screen overflow-y-auto;
 }
 
 .chat-message {

@@ -2,21 +2,30 @@
   import ChatMessage from '$lib/components/ChatMessage.svelte';
   import type { ChatCompletionRequestMessage } from 'openai';
   import { SSE } from 'sse.js';
+
   let query: string = '';
   let answer: string = '';
   let loading: boolean = false;
   let chatMessages: ChatCompletionRequestMessage[] = [];
   let scrollToDiv: HTMLDivElement;
+
+  const chatContainer: HTMLDivElement;
+
   $: {
     if (scrollToDiv) {
       scrollToDiv.scrollIntoView({ behavior: 'smooth' });
     }
   }
+
   async function handleSubmit() {
     if (loading) {
       return;
     }
-    if (!query.trim()) return;
+
+    if (!query.trim()) {
+      return;
+    }
+
     loading = true;
     chatMessages = [...chatMessages, { role: 'user', content: query }];
     const eventSource = new SSE('/api/chat', {
@@ -33,15 +42,15 @@
           chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
           answer = '';
           eventSource.close(); // Close the connection
-          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
           loading = false;
+          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
           return;
         }
         const completionResponse = JSON.parse(e.data);
         const [{ delta }] = completionResponse.choices;
         if (delta.content) {
           answer = (answer ?? '') + delta.content;
-          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+          chatContainer.scrollTop = chatContainer.scrollHeight;
         }
       } catch (err) {
         handleError(err);
@@ -49,13 +58,14 @@
     });
     eventSource.stream();
   }
+
   function handleError<T>(err: T) {
     loading = false;
     query = '';
     answer = '';
     console.error(err);
   }
-  
+
 </script>
 
 <style>

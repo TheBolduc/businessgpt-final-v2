@@ -103,7 +103,13 @@
           placeholder="Ask me anything about business..."
           disabled={loading}
         />
-        <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500" disabled={loading}> Send </button>
+        <button
+          type="submit"
+          class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500 hover:border-green-600"
+          disabled={loading}
+        >
+          Send
+        </button>
       </form>
     </div>
   </div>

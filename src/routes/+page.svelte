@@ -1,44 +1,59 @@
-async function handleSubmit() {
-  if (loading) {
-    return;
-  }
+<script lang="ts">
+  import { ChatMessage } from '$lib/components/ChatMessage';
+  import { SSE } from '$lib/sse';
 
-  if (!query.trim()) {
-    return;
-  }
+  let query = '';
+  let answer = '';
+  let loading = false;
+  let chatMessages = [];
 
-  loading = true;
-  chatMessages = [...chatMessages, { role: 'user', content: query }];
-  const eventSource = new SSE('/api/chat', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    payload: JSON.stringify({ messages: chatMessages }),
-  });
-  query = '';
-  eventSource.addEventListener('error', handleError);
-  eventSource.addEventListener('message', (e) => {
-    try {
-      if (e.data === '[DONE]') {
-        chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
-        answer = '';
-        eventSource.close(); // Close the connection
-        loading = false;
-        scrollToDiv.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-      const completionResponse = JSON.parse(e.data);
-      const [{ delta }] = completionResponse.choices;
-      if (delta.content) {
-        answer = (answer ?? '') + delta.content;
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }
-    } catch (err) {
-      handleError(err);
+  let chatContainer;
+  let scrollToDiv;
+
+  async function handleSubmit() {
+    if (loading) {
+      return;
     }
-  });
-  eventSource.stream();
-}
+
+    if (!query.trim()) {
+      return;
+    }
+
+    // Prevent sending messages while generating the answer
+    chatContainer.scrollTop = chatContainer.scrollHeight; // scroll to the bottom of the chat
+    query = '';
+    answer = '';
+    loading = true;
+    chatMessages = [...chatMessages, { role: 'user', content: query }];
+    const eventSource = new SSE('/api/chat', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      payload: JSON.stringify({ messages: chatMessages }),
+    });
+    eventSource.addEventListener('error', handleError);
+    eventSource.addEventListener('message', (e) => {
+      try {
+        if (e.data === '[DONE]') {
+          chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
+          answer = '';
+          eventSource.close(); // Close the connection
+          loading = false;
+          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+        const completionResponse = JSON.parse(e.data);
+        const [{ delta }] = completionResponse.choices;
+        if (delta.content) {
+          answer = (answer ?? '') + delta.content;
+          chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+      } catch (err) {
+        handleError(err);
+      }
+    });
+    eventSource.stream();
+  }
 
   function handleError<T>(err: T) {
     loading = false;

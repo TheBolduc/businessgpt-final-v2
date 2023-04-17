@@ -89,7 +89,7 @@
       class="flex w-full rounded-md bg-gray-200 py-4 px-2 shadow-inner space-x-2"
       on:submit|preventDefault={() => handleSubmit()}
     >
-      <input type="text" class="input input-bordered w-full shadow bg-white" bind:value={query} />
+      <input type="text" class="input input-bordered w-full shadow bg-white text-black" bind:value={query} />
       <button type="submit" class="btn btn-primary bg-green-500 hover:bg-green-600 border border-green-500"> Send </button>
     </form>
   </div>

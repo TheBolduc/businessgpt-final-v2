@@ -106,3 +106,11 @@ body {
 .input-bordered {
   background-color: #f3f4f6;
 }
+
+button:disabled {
+  @apply bg-gray-500 cursor-not-allowed;
+}
+
+button:disabled:hover {
+  @apply bg-gray-500 border-gray-500;
+}

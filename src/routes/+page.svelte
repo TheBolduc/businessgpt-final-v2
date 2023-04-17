@@ -2,7 +2,6 @@
   import ChatMessage from '$lib/components/ChatMessage.svelte';
   import type { ChatCompletionRequestMessage } from 'openai';
   import { SSE } from 'sse.js';
-
   let query: string = '';
   let answer: string = '';
   let loading: boolean = false;
@@ -85,7 +84,7 @@
         <div class="w-full border-b border-gray-400 mb-6"></div>
       </div>
       <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-        <div class="flex flex-col gap-2 h-[calc(100vh-300px)] overflow-y-auto mt-4 mb-4">
+        <div class="flex flex-col gap-2 h-[calc(100vh-300px)] overflow-y-auto mt-4 mb-4" bind:this={chatContainer}>
           <ChatMessage
             type="assistant"
             message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!"

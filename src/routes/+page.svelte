@@ -67,9 +67,15 @@
 <div class="chatbot-wrapper">
   <div class="flex flex-col min-h-screen pt-4 w-full px-8 items-center gap-2">
     <div class="flex flex-col w-full max-w-screen-md bg-white p-6 rounded-lg shadow-lg">
-      {/* ... (keep the existing content inside the div) */}
+      <div class="flex flex-col items-center justify-center mb-4">
+        <h1 class="text-2xl font-bold w-full text-center">BusinessGPT</h1>
+        <p class="text-sm italic">
+          Your own personal business analyst and assistant.
+        </p>
+        <div class="w-full border-b border-gray-400 mb-6"></div>
+      </div>
       <div class="flex flex-col pt-4 w-full h-full px-8 items-center gap-2">
-        <div class="flex flex-col gap-2 h-[calc(100vh-300px)] overflow-y-auto mt-4 mb-4">
+        <div class="flex flex-col gap-2 h-[calc(100vh-300px)] overflow-y-auto mt-4 mb-4 chat-container">
           <ChatMessage
             type="assistant"
             message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!"

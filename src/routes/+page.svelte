@@ -1,63 +1,44 @@
-<script lang="ts">
-  import ChatMessage from '$lib/components/ChatMessage.svelte';
-  import type { ChatCompletionRequestMessage } from 'openai';
-  import { SSE } from 'sse.js';
-
-  let query: string = '';
-  let answer: string = '';
-  let loading: boolean = false;
-  let chatMessages: ChatCompletionRequestMessage[] = [];
-  let scrollToDiv: HTMLDivElement;
-  let chatContainer: HTMLDivElement;
-
-  $: {
-    if (scrollToDiv) {
-      scrollToDiv.scrollIntoView({ behavior: 'smooth' });
-    }
+async function handleSubmit() {
+  if (loading) {
+    return;
   }
 
-  async function handleSubmit() {
-    if (loading) {
-      return;
-    }
+  if (!query.trim()) {
+    return;
+  }
 
-    if (!query.trim()) {
-      return;
-    }
-
-    loading = true;
-    chatMessages = [...chatMessages, { role: 'user', content: query }];
-    const eventSource = new SSE('/api/chat', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      payload: JSON.stringify({ messages: chatMessages }),
-    });
-    query = '';
-    eventSource.addEventListener('error', handleError);
-    eventSource.addEventListener('message', (e) => {
-      try {
-        if (e.data === '[DONE]') {
-          chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
-          answer = '';
-          eventSource.close(); // Close the connection
-          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
-        } else {
-          const completionResponse = JSON.parse(e.data);
-          const [{ delta }] = completionResponse.choices;
-          if (delta.content) {
-            answer = (answer ?? '') + delta.content;
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-          }
-        }
-      } catch (err) {
-        handleError(err);
-      } finally {
+  loading = true;
+  chatMessages = [...chatMessages, { role: 'user', content: query }];
+  const eventSource = new SSE('/api/chat', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    payload: JSON.stringify({ messages: chatMessages }),
+  });
+  query = '';
+  eventSource.addEventListener('error', handleError);
+  eventSource.addEventListener('message', (e) => {
+    try {
+      if (e.data === '[DONE]') {
+        chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
+        answer = '';
+        eventSource.close(); // Close the connection
         loading = false;
+        scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+        return;
       }
-    });
-    eventSource.stream();
-  }
+      const completionResponse = JSON.parse(e.data);
+      const [{ delta }] = completionResponse.choices;
+      if (delta.content) {
+        answer = (answer ?? '') + delta.content;
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+    } catch (err) {
+      handleError(err);
+    }
+  });
+  eventSource.stream();
+}
 
   function handleError<T>(err: T) {
     loading = false;

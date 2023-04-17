@@ -8,7 +8,6 @@
   let loading: boolean = false;
   let chatMessages: ChatCompletionRequestMessage[] = [];
   let scrollToDiv: HTMLDivElement;
-
   let chatContainer: HTMLDivElement;
 
   $: {
@@ -42,18 +41,19 @@
           chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
           answer = '';
           eventSource.close(); // Close the connection
-          loading = false;
           scrollToDiv.scrollIntoView({ behavior: 'smooth' });
-          return;
-        }
-        const completionResponse = JSON.parse(e.data);
-        const [{ delta }] = completionResponse.choices;
-        if (delta.content) {
-          answer = (answer ?? '') + delta.content;
-          chatContainer.scrollTop = chatContainer.scrollHeight;
+        } else {
+          const completionResponse = JSON.parse(e.data);
+          const [{ delta }] = completionResponse.choices;
+          if (delta.content) {
+            answer = (answer ?? '') + delta.content;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          }
         }
       } catch (err) {
         handleError(err);
+      } finally {
+        loading = false;
       }
     });
     eventSource.stream();

@@ -8,13 +8,17 @@
   let chatMessages: ChatCompletionRequestMessage[] = [];
   let scrollToDiv: HTMLDivElement;
 
-  function scrollToBottom() {
-    setTimeout(function () {
-      scrollToDiv.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-    }, 100);
+  $: {
+    if (scrollToDiv) {
+      scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
-  const handleSubmit = async () => {
+  async function handleSubmit() {
+    if (loading) {
+      return;
+    }
+
     if (!query.trim()) return;
     loading = true;
     chatMessages = [...chatMessages, { role: 'user', content: query }];
@@ -27,7 +31,6 @@
     query = '';
     eventSource.addEventListener('error', handleError);
     eventSource.addEventListener('message', (e) => {
-      scrollToBottom();
       try {
         loading = false;
         if (e.data === '[DONE]') {
@@ -46,8 +49,7 @@
       }
     });
     eventSource.stream();
-    scrollToBottom();
-  };
+  }
 
   function handleError<T>(err: T) {
     loading = false;

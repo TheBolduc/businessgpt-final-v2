@@ -7,18 +7,15 @@
   let loading: boolean = false;
   let chatMessages: ChatCompletionRequestMessage[] = [];
   let scrollToDiv: HTMLDivElement;
-
   $: {
     if (scrollToDiv) {
       scrollToDiv.scrollIntoView({ behavior: 'smooth' });
     }
   }
-
   async function handleSubmit() {
     if (loading) {
       return;
     }
-
     if (!query.trim()) return;
     loading = true;
     chatMessages = [...chatMessages, { role: 'user', content: query }];
@@ -32,17 +29,19 @@
     eventSource.addEventListener('error', handleError);
     eventSource.addEventListener('message', (e) => {
       try {
-        loading = false;
         if (e.data === '[DONE]') {
           chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
           answer = '';
           eventSource.close(); // Close the connection
+          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+          loading = false;
           return;
         }
         const completionResponse = JSON.parse(e.data);
         const [{ delta }] = completionResponse.choices;
         if (delta.content) {
           answer = (answer ?? '') + delta.content;
+          scrollToDiv.scrollIntoView({ behavior: 'smooth' });
         }
       } catch (err) {
         handleError(err);
@@ -50,7 +49,6 @@
     });
     eventSource.stream();
   }
-
   function handleError<T>(err: T) {
     loading = false;
     query = '';

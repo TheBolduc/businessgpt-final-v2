@@ -1,14 +1,22 @@
 <script lang="ts">
-  import { ChatMessage } from '$lib/components/ChatMessage';
-  import { SSE } from '$lib/sse';
+  import ChatMessage from '$lib/components/ChatMessage.svelte';
+  import type { ChatCompletionRequestMessage } from 'openai';
+  import { SSE } from 'sse.js';
 
-  let query = '';
-  let answer = '';
-  let loading = false;
-  let chatMessages = [];
+  let query: string = '';
+  let answer: string = '';
+  let loading: boolean = false;
+  let chatMessages: ChatCompletionRequestMessage[] = [];
 
-  let chatContainer;
-  let scrollToDiv;
+  let scrollToDiv: HTMLDivElement;
+  let inputField: HTMLInputElement;
+  let chatContainer: HTMLDivElement;
+
+  $: {
+    if (scrollToDiv) {
+      scrollToDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
   async function handleSubmit() {
     if (loading) {
@@ -19,10 +27,6 @@
       return;
     }
 
-    // Prevent sending messages while generating the answer
-    chatContainer.scrollTop = chatContainer.scrollHeight; // scroll to the bottom of the chat
-    query = '';
-    answer = '';
     loading = true;
     chatMessages = [...chatMessages, { role: 'user', content: query }];
     const eventSource = new SSE('/api/chat', {
@@ -31,6 +35,8 @@
       },
       payload: JSON.stringify({ messages: chatMessages }),
     });
+    query = '';
+    inputField.disabled = true;
     eventSource.addEventListener('error', handleError);
     eventSource.addEventListener('message', (e) => {
       try {
@@ -39,6 +45,7 @@
           answer = '';
           eventSource.close(); // Close the connection
           loading = false;
+          inputField.disabled = false;
           scrollToDiv.scrollIntoView({ behavior: 'smooth' });
           return;
         }
@@ -59,9 +66,9 @@
     loading = false;
     query = '';
     answer = '';
+    inputField.disabled = false;
     console.error(err);
   }
-
 </script>
 
 <style>

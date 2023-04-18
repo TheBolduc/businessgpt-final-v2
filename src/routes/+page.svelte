@@ -113,6 +113,7 @@
         <input
           type="text"
           class="input input-bordered w-full shadow bg-white text-black"
+          bind:this={inputField}
           bind:value={query}
           placeholder="Ask me anything about business..."
           disabled={loading}

@@ -50,9 +50,9 @@
           return;
         }
         const completionResponse = JSON.parse(e.data);
-        const [{ text }] = completionResponse.choices; // Changed from delta to text
-        if (text) {
-          answer = (answer ?? '') + text; // Changed from delta.content to text
+        const [{ delta }] = completionResponse.choices;
+        if (delta.content) {
+          answer = (answer ?? '') + delta.content;
           chatContainer.scrollTop = chatContainer.scrollHeight;
         }
       } catch (err) {

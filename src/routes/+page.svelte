@@ -50,9 +50,9 @@
           return;
         }
         const completionResponse = JSON.parse(e.data);
-        const [{ delta }] = completionResponse.choices;
-        if (delta.content) {
-          answer = (answer ?? '') + delta.content;
+        const [{ text }] = completionResponse.choices; // Changed from delta to text
+        if (text) {
+          answer = (answer ?? '') + text; // Changed from delta.content to text
           chatContainer.scrollTop = chatContainer.scrollHeight;
         }
       } catch (err) {
@@ -94,6 +94,7 @@
             message="Hi! My name is Tommy, ask me any business-related questions, I'm here to help you grow your business, learn about business, start your business and much more!"
           />
           {#each chatMessages as message}
+
             <ChatMessage type={message.role} message={message.content} />
           {/each}
           {#if answer}

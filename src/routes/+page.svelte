@@ -11,6 +11,7 @@
   let scrollToDiv: HTMLDivElement;
   let inputField: HTMLInputElement;
   let chatContainer: HTMLDivElement;
+  let loadingMessage: ChatCompletionRequestMessage | null = null;
 
   $: {
     if (scrollToDiv) {
@@ -43,6 +44,7 @@
         if (e.data === '[DONE]') {
           chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
           answer = '';
+          loadingMessage = null;
           eventSource.close(); // Close the connection
           loading = false;
           inputField.disabled = false;
@@ -53,6 +55,10 @@
         const [{ delta }] = completionResponse.choices;
         if (delta.content) {
           answer = (answer ?? '') + delta.content;
+          if (loadingMessage) {
+            chatMessages = chatMessages.filter((message) => message !== loadingMessage);
+            loadingMessage = null;
+          }
           chatContainer.scrollTop = chatContainer.scrollHeight;
         }
       } catch (err) {
@@ -60,12 +66,15 @@
       }
     });
     eventSource.stream();
+    loadingMessage = { role: 'assistant', content: 'Loading...' };
+    chatMessages = [...chatMessages, loadingMessage];
   }
 
   function handleError<T>(err: T) {
     loading = false;
     query = '';
     answer = '';
+    loadingMessage = null;
     inputField.disabled = false;
     console.error(err);
   }

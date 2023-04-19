@@ -5,6 +5,7 @@
 
   let query: string = '';
   let answer: string = '';
+  let loading: boolean = false;
   let chatMessages: ChatCompletionRequestMessage[] = [];
 
   let scrollToDiv: HTMLDivElement;
@@ -18,16 +19,21 @@
   }
 
   async function handleSubmit() {
-    if (query.trim() === '') {
+    if (loading) {
       return;
     }
 
-    chatMessages = [...chatMessages, { role: 'user', content: query }];
+    if (!query.trim()) {
+      return;
+    }
+
+    loading = true;
+    const messagesToSend = [...chatMessages, { role: 'user', content: query }];
     const eventSource = new SSE('/api/chat', {
       headers: {
         'Content-Type': 'application/json',
       },
-      payload: JSON.stringify({ messages: chatMessages }),
+      payload: JSON.stringify({ messages: messagesToSend }),
     });
     query = '';
     inputField.disabled = true;
@@ -35,25 +41,18 @@
     eventSource.addEventListener('message', (e) => {
       try {
         if (e.data === '[DONE]') {
-          chatMessages = [...chatMessages, { role: 'assistant', content: answer }];
+          chatMessages = [...messagesToSend, { role: 'assistant', content: answer }];
           answer = '';
           eventSource.close(); // Close the connection
+          loading = false;
           inputField.disabled = false;
           scrollToDiv.scrollIntoView({ behavior: 'smooth' });
           return;
         }
-
         const completionResponse = JSON.parse(e.data);
         const [{ delta }] = completionResponse.choices;
-
         if (delta.content) {
-          answer += delta.content;
-
-          if (!loading) {
-            loading = true;
-            chatMessages = [...chatMessages, { role: 'assistant', content: 'Loading...' }];
-          }
-
+          answer = (answer ?? '') + delta.content;
           chatContainer.scrollTop = chatContainer.scrollHeight;
         }
       } catch (err) {
@@ -62,8 +61,6 @@
     });
     eventSource.stream();
   }
-
-  let loading: boolean = false;
 
   function handleError<T>(err: T) {
     loading = false;

@@ -1,20 +1,29 @@
-import preprocess from "svelte-preprocess";
-import adapter from '@sveltejs/adapter-vercel';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import adapter from '@sveltejs/adapter-static';
+import preprocess from 'svelte-preprocess';
+import { resolve } from 'path';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
-	preprocess: [vitePreprocess(), preprocess({
-        postcss: true
-    })],
-
-	kit: {
-		adapter: adapter({
-            runtime: 'nodejs18.x'
-        })
-	}
+  preprocess: preprocess(),
+  kit: {
+    adapter: adapter({
+      // default options are shown
+      pages: 'build',
+      assets: 'build',
+      fallback: null
+    }),
+    target: '#svelte',
+    vite: {
+      resolve: {
+        alias: {
+          $components: resolve('./src/components'),
+          $lib: resolve('./src/lib'),
+        }
+      },
+      ssr: {
+        external: ['svelte-routing']
+      }
+    }
+  }
 };
 
 export default config;

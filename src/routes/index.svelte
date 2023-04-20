@@ -1,16 +1,8 @@
 <script>
-  import MainMenu from "./MainMenu.svelte";
+	import MainMenu from "./MainMenu.svelte";
+	import { Route } from "svelte-routing";
 </script>
 
-<style>
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-</style>
-
-<main>
-  <MainMenu />
-</main>
+<Route path="/" let:params>
+	<MainMenu />
+</Route>

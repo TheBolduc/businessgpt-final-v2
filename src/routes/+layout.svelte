@@ -1,6 +1,6 @@
 <!-- +layout.svelte -->
 <script>
-  import MainMenu from "../components/MainMenu.svelte";
+  import MainMenu from '../../lib/MainMenu.svelte';
   import { Router } from "svelte-routing";
 </script>
 

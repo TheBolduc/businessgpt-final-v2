@@ -1,5 +1,5 @@
 <script>
-  import { NavLink } from "$app/navigation";
+  import { NavLink } from "svelte-routing";
 </script>
 
 <style>
@@ -9,7 +9,6 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
-    height: 100vh;
   }
   .menu-link {
     text-decoration: none;
@@ -23,25 +22,22 @@
 </style>
 
 <div class="menu-container">
-  <a class="menu-link" href="business_operations">
-    Business Operations and Efficiency Related
-  </a>
-  <a class="menu-link" href="customer_relationship">
-    Customer Relationship Related
-  </a>
-   <a class="menu-link" href="change_management">
-    Change Management Related
-  </a>
-   <a class="menu-link" href="data_driven_decision_making">
-    Data-Driven Decision Making Related
-  </a>
-   <a class="menu-link" href="innovation_sustainability_growth">
-    Innovation, Sustainability and Growth Related
-  </a>
-   <a class="menu-link" href="sales_marketing_customer_experience">
-    Sales, Marketing and Customer Experience Related
-  </a>
-   <a class="menu-link" href="workforce_management_development">
-    Workforce, Management and Development related
-  </a>
+  <NavLink class="menu-link" to="business_operations">
+    Business Operations and Efficiency
+  </NavLink>
+  <NavLink class="menu-link" to="customer_relationship">
+    Customer Relationship and Change Management
+  </NavLink>
+  <NavLink class="menu-link" to="data_driven_decision_making">
+    Data-Driven Decision Making and Analytics
+  </NavLink>
+  <NavLink class="menu-link" to="innovation_sustainability_growth">
+    Innovation, Sustainability, and Growth
+  </NavLink>
+  <NavLink class="menu-link" to="sales_marketing_customer_experience">
+    Sales, Marketing, and Customer Experience
+  </NavLink>
+  <NavLink class="menu-link" to="workforce_management_development">
+    Workforce Management and Development
+  </NavLink>
 </div>

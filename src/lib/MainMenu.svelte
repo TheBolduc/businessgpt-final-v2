@@ -1,23 +1,44 @@
 <script>
-  import { goto } from '$app/navigation';
-
-  function navigateToChatbot(chatbotId) {
-    goto(`/chatbot/${chatbotId}`);
-  }
+  import { NavLink } from "svelte-routing";
 </script>
 
 <style>
-  /* Add your styles for the main menu here */
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .menu-link {
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: #333;
+    transition: color 0.3s;
+  }
+  .menu-link:hover {
+    color: #555;
+  }
 </style>
 
-<main>
-  <h1>Select a chatbot:</h1>
-  <ul>
-    <li><button on:click={() => navigateToChatbot('business-operations')}>Business Operations and Efficiency</button></li>
-    <li><button on:click={() => navigateToChatbot('customer-relationship')}>Customer Relationship and Change Management</button></li>
-    <li><button on:click={() => navigateToChatbot('data-driven-decision')}>Data-Driven Decision Making and Analytics</button></li>
-    <li><button on:click={() => navigateToChatbot('innovation-sustainability')}>Innovation, Sustainability, and Growth</button></li>
-    <li><button on:click={() => navigateToChatbot('sales-marketing')}>Sales, Marketing, and Customer Experience</button></li>
-    <li><button on:click={() => navigateToChatbot('workforce-management')}>Workforce Management and Development</button></li>
-  </ul>
-</main>
+<div class="menu-container">
+  <NavLink class="menu-link" to="business_operations">
+    Business Operations and Efficiency
+  </NavLink>
+  <NavLink class="menu-link" to="customer_relationship">
+    Customer Relationship and Change Management
+  </NavLink>
+  <NavLink class="menu-link" to="data_driven_decision_making">
+    Data-Driven Decision Making and Analytics
+  </NavLink>
+  <NavLink class="menu-link" to="innovation_sustainability_growth">
+    Innovation, Sustainability, and Growth
+  </NavLink>
+  <NavLink class="menu-link" to="sales_marketing_customer_experience">
+    Sales, Marketing, and Customer Experience
+  </NavLink>
+  <NavLink class="menu-link" to="workforce_management_development">
+    Workforce Management and Development
+  </NavLink>
+</div>
